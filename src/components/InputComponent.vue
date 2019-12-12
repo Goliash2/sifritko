@@ -1,16 +1,18 @@
 <template>
     <ion-grid>
-        <form>
+        <form @submit.prevent="onSubmit">
             <ion-col>
                 <ion-item>
-                    <ion-label>
-                        Zadani:
-                    </ion-label>
-                    <ion-input name="input"></ion-input>
+                    <ion-label>Zadání:</ion-label>
+                    <ion-input
+                            :value="zadani"
+                            @input="zadani = $event.target.value"
+                            name="zadani"
+                    ></ion-input>
                 </ion-item>
             </ion-col>
             <ion-col>
-                <ion-button type="submit" color="primary" expand="block">Lustit</ion-button>
+                <ion-button type="submit" color="primary" expand="block">Luštit</ion-button>
             </ion-col>
         </form>
     </ion-grid>
@@ -18,6 +20,16 @@
 
 <script>
     export default {
-        name: "input.component"
+        name: "InputComponent",
+        data() {
+            return {
+                zadani: ""
+            }
+        },
+        methods: {
+            onSubmit() {
+                this.$emit("get-zadani", this.zadani);
+            }
+        }
     }
 </script>
